@@ -23,8 +23,6 @@ Connection.getConnection = function() {
 	return connection;
 };
 
-var pool;
-
 /*
  * method to return a pool of connected servers
  */
@@ -35,11 +33,14 @@ Connection.pool = function(hosts, database) {
 	if(!database)
 	    console.log("No database provided");
 	
-	console.log("Connecting to hosts...");
-	pool = new Helenus.ConnectionPool({
+	var pool;
+	if(hosts && database) {
+	   console.log("Connecting to hosts...");
+	   pool = new Helenus.ConnectionPool({
 			hosts : hosts,
 			keyspace : database
-		});
+	   });
+	}
 
 	return pool;
 };
